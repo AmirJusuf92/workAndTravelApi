@@ -1,0 +1,33 @@
+<%- include("partials/navbar") %>
+<h2>Welcome, <%= user.first_name %>!</h2>
+
+<h3>Your Uploaded Files</h3>
+<ul>
+  <% files.forEach(file => { %>
+    <li><a href="/download/<%= file.filename %>"><%= file.filename %></a></li>
+  <% }) %>
+</ul>
+
+<h3>Upload a File</h3>
+<form action="/upload" method="POST" enctype="multipart/form-data">
+  <input type="file" name="pdf" accept="application/pdf" required><br>
+  <button type="submit">Upload</button>
+</form>
+
+<h3>Messages</h3>
+<% if (messages.length > 0) { %>
+  <% messages.forEach(msg => { %>
+      <div style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
+          <strong>From:</strong> <%= msg.user_email %> <br>
+          <strong>Message:</strong> <%= msg.message %> <br>
+          <small>Sent at: <%= msg.sent_at %></small>
+      </div>
+  <% }); %>
+<% } else { %>
+  <p>No messages found.</p>
+<% } %>
+
+
+
+<a href="/change_password">Change Password</a>
+<a href="/message">Send Message to Admin</a>

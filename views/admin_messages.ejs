@@ -1,0 +1,20 @@
+<%- include("partials/navbar") %>
+<h2>Messages from Users</h2>
+
+<% if (messages && messages.length > 0) { %>
+  <% messages.forEach(msg => { %>
+      <div style="border: 1px solid #ddd; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
+          <strong>From:</strong> 
+          <% if (msg.is_from_admin) { %>
+              Admin
+          <% } else { %>
+              <%= msg.user_email %>
+          <% } %>
+          <br>
+          <strong>Message:</strong> <%= msg.message %> <br>
+          <small>Sent at: <%= msg.sent_at %></small>
+      </div>
+  <% }); %>
+<% } else { %>
+    <p>No messages found.</p>
+<% } %>

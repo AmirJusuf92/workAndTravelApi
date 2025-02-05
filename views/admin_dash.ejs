@@ -1,0 +1,45 @@
+<%- include("partials/navbar") %>
+<h2>Admin Dashboard</h2>
+
+<h3>Search Users</h3>
+<form action="/search_users" method="GET">
+  <input type="text" name="query" placeholder="Search by first name, last name, or email">
+  <button type="submit">Search</button>
+</form>
+
+<h3>All Users</h3>
+<table>
+  <tr><th>Name</th><th>Email</th><th>Actions</th></tr>
+  <% users.forEach(user => { %>
+    <tr>
+      <td><%= user.first_name %> <%= user.last_name %></td>
+      <td><%= user.email %></td>
+      <td><a href="/message?user_id=<%= user.id %>">Send Message</a></td>
+    </tr>
+  <% }) %>
+</table>
+
+<h3>All Uploaded Files</h3>
+<ul>
+  <% files.forEach(file => { %>
+    <li><%= file.first_name %> <%= file.last_name %>: <a href="/download/<%= file.filename %>"><%= file.filename %></a></li>
+  <% }) %>
+</ul>
+<h3>Send Message to a User</h3>
+<form action="/message" method="POST">
+    <label>Select User:</label>
+    <select name="user_id" required>
+        <% users.forEach(user => { %>
+            <option value="<%= user.id %>"><%= user.email %></option>
+        <% }) %>
+    </select>
+
+    <label>Message:</label>
+    <textarea name="message" required></textarea>
+    
+    
+    <button type="submit">Send Message</button>
+</form>
+
+
+<a href="/admin_messages">View All Messages</a>

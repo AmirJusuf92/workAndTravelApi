@@ -1,0 +1,6 @@
+<%- include("partials/navbar") %>
+<h2>Send a Message to Admin</h2>
+<form action="/message_admin" method="POST">
+  <textarea name="message" placeholder="Type your message" required></textarea><br>
+  <button type="submit">Send</button>
+</form>
